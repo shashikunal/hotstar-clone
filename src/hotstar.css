@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
+@import url("https://pro.fontawesome.com/releases/v5.10.0/css/all.css");
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,3 +11,6 @@ body {
   font-family: "Roboto", "HelveticaNeue-Light", sans-serif;
   font-size: 14px;
 }
+
+/* 
+linear-gradient(to bottom, rgb(20 27 41), rgb(12 17 27) 300px) */

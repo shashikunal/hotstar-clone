@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import HeaderComponent from "./HotStarComponents/HeaderComponent/Header";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -7,7 +8,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <h1>Welcome to Hotstar website</h1>
+        <header>
+          <HeaderComponent />
+        </header>
       </Fragment>
     );
   }
