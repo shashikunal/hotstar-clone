@@ -9,10 +9,10 @@ class Login extends Component {
   render() {
     return (
       <Fragment>
-        <section className="loginBlock">
+        <section className="authBlock">
           <section className="card col-md-3 mx-auto">
             <article className="form-block">
-              <h2>Login</h2>
+              <h5 className="h5 font-weight-bold p-4">Login to continue</h5>
               <div className="card-body">
                 <form>
                   <div className="form-group">
@@ -34,12 +34,17 @@ class Login extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <button className="btn btn-block btn-primary">Login</button>
+                    <button className="btn btn-block btn-outline-primary">
+                      Login
+                    </button>
                   </div>
                   <div className="form-group">
                     <span>
                       Don't have an account Please
-                      <Link to="/register" className="register-link">
+                      <Link
+                        to="/register"
+                        className="register-link float-right"
+                      >
                         Register
                       </Link>
                     </span>

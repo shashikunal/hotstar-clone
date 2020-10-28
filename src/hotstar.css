@@ -7,10 +7,7 @@
 }
 
 body {
-  background: #efefef;
+  background: linear-gradient(to bottom, rgb(20 27 41), rgb(12 17 27) 300px);
   font-family: "Roboto", "HelveticaNeue-Light", sans-serif;
   font-size: 14px;
 }
-
-/* 
-linear-gradient(to bottom, rgb(20 27 41), rgb(12 17 27) 300px) */
