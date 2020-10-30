@@ -1,59 +1,81 @@
 import React, { Component, Fragment } from "react";
-import { toast } from "react-toastify";
 import firebase from "../../firebase";
+import { toast } from "react-toastify";
 import md5 from "md5";
+
 import { Link } from "react-router-dom";
-import "./Auth-Styles.css";
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      password: "",
       email: "",
+      phone: "",
+      password: "",
     };
   }
+  //handle Change event
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  //handle submit
   handleSubmit = async (e) => {
+    let { username, email, phone, password } = this.state;
+    console.log(phone);
     try {
-      let { username, password, email } = this.state;
       e.preventDefault();
-      //connecting firebase auth provider
-      let userData = await firebase
+      let userInfo = await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password);
-      userData.user.sendEmailVerification(); //firebase
-      let message = `A verification has been sent to ${email} and please verify email address `;
-      toast.success(message);
-      //update profile including user photo , phone number , id ,whatever
-      await userData.user.updateProfile({
+      //email verification firebase is having built-in method sendEmailVerification()
+      userInfo.user.sendEmailVerification();
+      let verificationMessage = `A verification has been sent to ${email} Please verify the email address`;
+      toast.success(verificationMessage);
+      console.log(userInfo);
+      //update profile including profile photo , phone number , id
+      await userInfo.user.updateProfile({
         displayName: username,
         photoURL: `https://www.gravatar.com/avatar/${md5(
-          userData.user.email
+          userInfo.user.email
         )}?d=identicon`,
       });
 
+      // await userInfo.user.updatePhoneNumber({
+      //   phoneCredential: phone,
+      // });
+      //save user profile in to firebase realtime database
+      await firebase
+        .database()
+        .ref()
+        .child("/users" + userInfo.user.uid)
+        .set({
+          email: userInfo.user.email,
+          photoURL: userInfo.user.photoURL,
+          displayName: userInfo.user.displayName,
+          uid: userInfo.user.uid,
+          registrationDate: new Date().toString(),
+        });
       this.setState({
         username: "",
-        password: "",
         email: "",
+        phone: "",
+        password: "",
       });
     } catch (err) {
-      console.error(err);
+      console.log(err);
       toast.error(err.message);
     }
   };
+
   render() {
-    let { username, password, email } = this.state;
+    let { username, email, phone, password } = this.state;
     return (
       <Fragment>
         <section className="authBlock">
           <section className="card col-md-3 mx-auto">
             <article className="form-block">
-              <h5 className="h5 font-weight-bold p-4">Register to continue </h5>
+              <h5 className="h5 font-weight-bold p-4">Register to continue</h5>
               <div className="card-body">
                 <form onSubmit={this.handleSubmit}>
                   <div className="form-group">
@@ -62,7 +84,6 @@ class Register extends Component {
                       type="text"
                       className="form-control"
                       name="username"
-                      placeholder="enter username"
                       value={username}
                       onChange={this.handleChange}
                       required
@@ -74,10 +95,20 @@ class Register extends Component {
                       type="email"
                       className="form-control"
                       name="email"
-                      required
                       value={email}
                       onChange={this.handleChange}
-                      placeholder="enter email"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone Number</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="phone"
+                      value={phone}
+                      onChange={this.handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -86,7 +117,6 @@ class Register extends Component {
                       type="password"
                       className="form-control"
                       name="password"
-                      placeholder="enter password"
                       value={password}
                       onChange={this.handleChange}
                       required
@@ -99,7 +129,7 @@ class Register extends Component {
                   </div>
                   <div className="form-group">
                     <span>
-                      Already have an account Please
+                      Already i have an account Please
                       <Link to="/login" className="register-link float-right">
                         Login
                       </Link>
