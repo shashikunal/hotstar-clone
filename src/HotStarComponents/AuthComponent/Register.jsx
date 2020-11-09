@@ -22,7 +22,7 @@ class Register extends Component {
   //handle submit
   handleSubmit = async (e) => {
     let { username, email, phone, password } = this.state;
-    console.log(phone);
+
     try {
       e.preventDefault();
       let userInfo = await firebase

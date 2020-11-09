@@ -1,12 +1,66 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { toast } from "react-toastify";
+import firebase from "../../firebase";
 import "./HeaderStyles.css";
 class HeaderComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      user: "",
+    };
   }
+
+  signOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then((_) => {
+        toast.success("successfully user signout");
+        this.props.history.push("/login");
+      })
+      .catch((err) => toast.error(err.message));
+  };
+
   render() {
+    let { photoURL, displayName, email } = this.props.user;
+
+    let AnonymousUser = () => {
+      return (
+        <Fragment>
+          <li className="nav-item">
+            <Link className="nav-link text-uppercase" to="/login">
+              login
+            </Link>
+          </li>
+        </Fragment>
+      );
+    };
+
+    let AuthUser = () => {
+      return (
+        <Fragment>
+          <li className="nav-item profile_block">
+            <a className="nav-link text-uppercase">
+              <img src={photoURL} alt={displayName} />
+            </a>
+            <ul className="dropdownMenu">
+              <li>
+                <a href="/">Watchlist</a>
+              </li>
+              <li>
+                <a href="/">{displayName}</a>
+              </li>
+              <li>
+                <a href="/login" onClick={this.signOut}>
+                  signout
+                </a>
+              </li>
+            </ul>
+          </li>
+        </Fragment>
+      );
+    };
     return (
       <Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -91,11 +145,7 @@ class HeaderComponent extends Component {
                   subscribe
                 </a>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link text-uppercase" to="/login">
-                  login
-                </Link>
-              </li>
+              {this.props.user ? <AuthUser /> : <AnonymousUser />}
             </ul>
           </div>
         </nav>
@@ -104,4 +154,4 @@ class HeaderComponent extends Component {
   }
 }
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);
