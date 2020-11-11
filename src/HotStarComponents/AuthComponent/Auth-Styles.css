@@ -20,7 +20,9 @@
   border-color: rgb(31 128 224);
 }
 
-.authBlock input {
+.authBlock input,
+.authBlock textarea,
+.authBlock select {
   background: rgb(0 0 0 / 0%) !important;
   border: 1px solid rgb(73 80 87) !important;
 }
@@ -35,4 +37,12 @@
   font-weight: bold;
   border: 1px solid rgb(31 128 224);
   border-radius: 2px;
+}
+
+.password-reset a {
+  border: none !important;
+  color: rgb(255 255 255);
+  text-align: right;
+  display: block;
+  margin: -10px -9px 10px;
 }

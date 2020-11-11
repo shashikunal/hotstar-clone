@@ -78,6 +78,12 @@ class Login extends Component {
                     </button>
                   </div>
                   <div className="form-group">
+                    <span
+                      className="float-right d-block hr password-reset"
+                      style={{ width: "100%", margin: "8px 0px" }}
+                    >
+                      <Link to="/password-reset"> Forgot password</Link>
+                    </span>
                     <span>
                       Don't have an account Please
                       <Link

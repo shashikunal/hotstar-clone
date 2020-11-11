@@ -94,11 +94,21 @@
 .dropdownMenu {
   display: none;
   list-style: none;
-  background: #111;
+  background: rgb(103 58 183);
+  position: absolute;
+  top: 57px;
+  width: 166px;
+  left: -106px;
+  padding: 10px;
+  border-radius: 2px;
 }
 
 .dropdownMenu a {
   color: #fff;
+}
+
+.profile_block {
+  position: relative;
 }
 
 .profile_block:hover .dropdownMenu {
