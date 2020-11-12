@@ -51,6 +51,11 @@ class HeaderComponent extends Component {
               <li>
                 <a href="/">{displayName}</a>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link text-uppercase" to="/upload-movies">
+                  Upload Movies
+                </Link>
+              </li>
               <li>
                 <a href="/login" onClick={this.signOut}>
                   signout
