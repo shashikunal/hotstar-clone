@@ -101,6 +101,7 @@
   left: -106px;
   padding: 10px;
   border-radius: 2px;
+  z-index: 1;
 }
 
 .dropdownMenu a {

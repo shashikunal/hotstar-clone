@@ -9,6 +9,7 @@ import Register from "./HotStarComponents/AuthComponent/Register";
 import HeaderComponent from "./HotStarComponents/HeaderComponent/Header";
 import PasswordReset from "./HotStarComponents/AuthComponent/PasswordReset";
 import AddMovieForm from "./HotStarComponents/HotStarAdmin/AddMovieForm";
+import ListMovies from "./HotStarComponents/HotStarAdmin/ListMovies";
 
 class App extends Component {
   constructor(props) {
@@ -50,6 +51,11 @@ class App extends Component {
                   path="/upload-movies"
                   exact
                   component={() => <AddMovieForm user={this.state.userData} />}
+                />
+                <Route
+                  path="/list-movies"
+                  exact
+                  component={() => <ListMovies user={this.state.userData} />}
                 />
               </Fragment>
             ) : null}

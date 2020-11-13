@@ -94,9 +94,9 @@ class HeaderComponent extends Component {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/list-movies">
                   Movies
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/">
