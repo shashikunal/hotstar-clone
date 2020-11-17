@@ -8,7 +8,20 @@ class ListMovie extends Component {
     this.state = {
       movie: "",
     };
+
+    this.videoRef = React.createRef();
+    this.mainVideoRef = React.createRef();
   }
+
+  VideoPlayOrPaused = () => {
+    this.videoRef.current.play();
+    this.videoRef.current.style.width = "100%";
+    this.videoRef.current.style.height = "100%";
+
+    this.videoRef.current.setAttribute("controls", "controls");
+
+    this.mainVideoRef.current.style.display = "none";
+  };
 
   async componentDidMount() {
     await firebase
@@ -22,16 +35,38 @@ class ListMovie extends Component {
   }
 
   render() {
-    console.log(this.state.movie);
+    let {
+      name,
+      url,
+      year,
+      type,
+      rating,
+      genre,
+      description,
+      language,
+    } = this.state.movie;
     return (
       <Fragment>
-        <section className="moviesBlock">
-          <h2>Hindi</h2>
+        <section className="moviesBlock movieBlockId">
           <article className="row">
-            <h1>list movie</h1>
-            <video controls={true}>
-              <source src={this.state.movie.url}></source>
+            <video ref={this.videoRef}>
+              <source src={url}></source>
             </video>
+            <main ref={this.mainVideoRef}>
+              <h2>{name}</h2>
+              <div className="descriptionBlock">
+                <span>{year}</span>
+                <span>{type}</span>
+                <span>{rating}</span>
+                <span>{language}</span>
+              </div>
+              <div>
+                <p>{description}</p>
+              </div>
+              <div>
+                <button onClick={this.VideoPlayOrPaused}>watch Movie</button>
+              </div>
+            </main>
           </article>
         </section>
       </Fragment>

@@ -11,6 +11,7 @@ import PasswordReset from "./HotStarComponents/AuthComponent/PasswordReset";
 import AddMovieForm from "./HotStarComponents/HotStarAdmin/AddMovieForm";
 import ListMovies from "./HotStarComponents/HotStarAdmin/ListMovies";
 import ListMovie from "./HotStarComponents/HotStarAdmin/ListMovie";
+import RefExample from "./RefComponent/RefExampleComponent";
 
 class App extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class App extends Component {
         <header>
           <HeaderComponent user={this.state.userData} />
         </header>
+
         <main>
           <ToastContainer />
           <Switch>
