@@ -23,19 +23,20 @@ class AddMovieForm extends Component {
     };
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     // handling value
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleUploadFiles = (e) => {
+  handleUploadFiles = e => {
     //handling files like upload files
     if (e.target.files[0]) {
       this.setState({ video: e.target.files[0] });
     }
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
+    console.log(this.state);
     e.preventDefault();
     try {
       let { video } = this.state;
@@ -46,10 +47,11 @@ class AddMovieForm extends Component {
       //events
       MovieTask.on(
         "state_changed",
-        (snapShot) => {
+        snapShot => {
           //progress status
-          let progressStatus =
-            Math.round((snapShot.bytesTransferred / snapShot.totalBytes) * 100); //current status
+          let progressStatus = Math.round(
+            (snapShot.bytesTransferred / snapShot.totalBytes) * 100
+          ); //current status
           this.setState({ progress: progressStatus, barStatus: true });
         },
         () => {
@@ -63,7 +65,7 @@ class AddMovieForm extends Component {
             .ref("hotstarMovies")
             .child(video.name)
             .getDownloadURL()
-            .then((url) => {
+            .then(url => {
               this.setState({ url }, () => {
                 //connect to real time database;
                 let movieDetails = this.state;
@@ -77,7 +79,7 @@ class AddMovieForm extends Component {
                 this.props.history.push("/");
               });
             })
-            .catch((err) => console.log(err));
+            .catch(err => console.log(err));
         }
       );
     } catch (err) {
@@ -100,9 +102,16 @@ class AddMovieForm extends Component {
     } = this.state;
 
     let progressBar = (
-      <progress max="100" value={progress} style={{ width: "100%" }}>
-        {progress}
-      </progress>
+      <Fragment>
+        <progress
+          max="100"
+          value={progress}
+          style={{ width: "100%", position: "absolute", top: "30%" }}
+        >
+          {progress}
+        </progress>
+        <span>{progress}</span>
+      </Fragment>
     );
 
     return (
@@ -140,12 +149,13 @@ class AddMovieForm extends Component {
                         />
                       </div>
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-md-6">
                       <div className="form-group">
                         {barStatus ? progressBar : null}
                         <label htmlFor="language">Upload Movie</label>
                         <input
                           type="file"
+                          capture
                           className="form-control"
                           name="video"
                           onChange={this.handleUploadFiles}

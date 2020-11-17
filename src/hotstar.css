@@ -18,22 +18,106 @@ body {
   padding-right: 2.5%;
   padding-top: 2.5%;
 }
+.thumbnail_video_block {
+  height: 160px;
+  overflow: hidden;
+}
 
-.moviesBlock video {
+.moviesBlock .thumbnail_video {
   width: 100%;
   object-fit: cover;
-  height: 200px;
+  height: 150px;
+  border-radius: 5px;
 }
 
 .moviesBlock .col-md-3 {
-  background: rgb(17 17 17);
-  border: 1px solid rgb(68 74 77 / 93%);
-  padding: 10px;
   border-radius: 4px;
+  position: relative;
 }
 
 .moviesBlock img {
   width: 40px;
   height: 40px;
   border-radius: 100%;
+}
+.videoContentBlock {
+  position: absolute;
+  width: 298px;
+  top: 25px;
+  font-size: 12px;
+  padding: 0px 0px;
+  background: rgb(20 27 41);
+  opacity: 0.9;
+  margin: 10px 0px;
+  border-radius: 0px;
+  z-index: 4;
+  transform: translateY(132px);
+  cursor: pointer;
+  transition: ease-out all 0.9s;
+}
+
+.videoContentBlock h5 {
+  font-size: 12px;
+  padding: 6px 6px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  border-bottom: 1px solid #212529;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.movieContentBlock {
+  display: flex;
+  padding: 0 10px;
+  font-size: 11px;
+}
+
+.movieDescriptionBlock {
+  padding: 0 10px;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.watchMovieBlock {
+  background: rgb(20 27 41);
+  padding: 10px 10px;
+  font-size: 11px;
+  margin: -15px 0;
+  width: 100%;
+}
+
+.watchMovieBlock a {
+  color: #fff;
+  text-decoration: none;
+}
+.watchMovieBlock span {
+  margin: 0px 9px 5px 0px;
+}
+
+.col-md-2 {
+  flex: 0 0 20.666667%;
+  max-width: 20.666667%;
+  padding: 5px;
+}
+
+.watchMovieBlock:hover {
+  background: #343a40;
+  cursor: pointer;
+  border-radius: 0px 0px 5px 5px;
+  border-bottom: 2px solid #adb5bd;
+}
+
+.videoBlock:hover .videoContentBlock {
+  transform: translateY(0px);
+  cursor: pointer;
+  transition: ease-out all 0.9s;
+  position: absolute;
+  z-index: 1;
+  display: block;
 }

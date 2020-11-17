@@ -10,6 +10,7 @@ import HeaderComponent from "./HotStarComponents/HeaderComponent/Header";
 import PasswordReset from "./HotStarComponents/AuthComponent/PasswordReset";
 import AddMovieForm from "./HotStarComponents/HotStarAdmin/AddMovieForm";
 import ListMovies from "./HotStarComponents/HotStarAdmin/ListMovies";
+import ListMovie from "./HotStarComponents/HotStarAdmin/ListMovie";
 
 class App extends Component {
   constructor(props) {
@@ -17,14 +18,14 @@ class App extends Component {
     this.state = { userData: "" };
   }
 
-  async componentDidMount() {
-    await firebase.auth().onAuthStateChanged((user) => {
-      if (user === null) {
-        console.log("no user");
-      }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      // if (user === null) {
+      //   console.log("no user");
+      // }
       if (user) {
         this.setState({ userData: user });
-        // this.props.history.push("/");
+        // this.props.history.push("/list-movies");
       } else {
         this.setState({ userData: "" });
         this.props.history.push("/login");
@@ -33,7 +34,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Fragment>
         <header>
@@ -56,6 +56,12 @@ class App extends Component {
                   path="/list-movies"
                   exact
                   component={() => <ListMovies user={this.state.userData} />}
+                />
+
+                <Route
+                  path="/list-movie/:name/:id"
+                  exact
+                  component={() => <ListMovie user={this.state.userData} />}
                 />
               </Fragment>
             ) : null}
