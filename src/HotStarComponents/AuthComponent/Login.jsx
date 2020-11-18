@@ -13,11 +13,11 @@ class Login extends Component {
   }
 
   //handle Change event
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = async e => {
     let { email, password } = this.state;
     let { history, match } = this.props;
     try {
@@ -77,6 +77,15 @@ class Login extends Component {
                       Login
                     </button>
                   </div>
+
+                  <div className="form-group">
+                    <span>
+                      <Link to="/phone-auth" className="phone_auth_block">
+                        login with phone Number
+                      </Link>
+                    </span>
+                  </div>
+
                   <div className="form-group">
                     <span
                       className="float-right d-block hr password-reset"
