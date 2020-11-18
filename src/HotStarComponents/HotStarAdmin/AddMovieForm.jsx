@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import firebase from "../../firebase";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Video } from "video-metadata-thumbnails";
 class AddMovieForm extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,7 @@ class AddMovieForm extends Component {
       rating: 0,
       language: "",
       type: "",
-
+      duration: "",
       video: "",
       url: "",
       progress: 0,
@@ -36,14 +37,15 @@ class AddMovieForm extends Component {
   };
 
   handleSubmit = e => {
-    console.log(this.state);
     e.preventDefault();
     try {
       let { video } = this.state;
+      //MovieTask
       let MovieTask = firebase
         .storage()
         .ref(`/hotstarMovies/${video.name}`)
         .put(video);
+
       //events
       MovieTask.on(
         "state_changed",
@@ -54,8 +56,9 @@ class AddMovieForm extends Component {
           ); //current status
           this.setState({ progress: progressStatus, barStatus: true });
         },
-        () => {
+        err => {
           //error handling
+          console.log(err);
         },
         () => {
           //completion of status and connect to database
@@ -76,7 +79,7 @@ class AddMovieForm extends Component {
                     ...movieDetails,
                   });
                 toast.success("successfully movie created");
-                this.props.history.push("/");
+                // this.props.history.push("/");
               });
             })
             .catch(err => console.log(err));

@@ -26,7 +26,7 @@ class App extends Component {
       // }
       if (user) {
         this.setState({ userData: user });
-        // this.props.history.push("/list-movies");
+        this.props.history.push("/list-movies");
       } else {
         this.setState({ userData: "" });
         this.props.history.push("/login");

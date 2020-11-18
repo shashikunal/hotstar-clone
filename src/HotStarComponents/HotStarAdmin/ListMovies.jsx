@@ -61,7 +61,7 @@ class ListMovies extends Component {
               <p className="watchMovieBlock">
                 <span>
                   <span>
-                    <i className="far fa-video"></i>
+                    <i className="fas fa-play"></i>
                   </span>
                   <Link
                     to={{

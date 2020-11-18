@@ -15,11 +15,11 @@ class HeaderComponent extends Component {
     firebase
       .auth()
       .signOut()
-      .then((_) => {
+      .then(_ => {
         toast.success("successfully user signout");
         this.props.history.push("/login");
       })
-      .catch((err) => toast.error(err.message));
+      .catch(err => toast.error(err.message));
   };
 
   render() {
@@ -73,7 +73,7 @@ class HeaderComponent extends Component {
             <i className="fad fa-bars"></i>
           </span>
           <a className="navbar-brand" href="/">
-            <img src="disney-hotstar-logo-dark.svg" alt="logo" />
+            <img src="/disney-hotstar-logo-dark.svg" alt="logo" />
           </a>
           <button
             className="navbar-toggler"
@@ -135,7 +135,7 @@ class HeaderComponent extends Component {
                 />
                 <span style={{ position: "relative" }}>
                   <i
-                    class="fas fa-search"
+                    className="fas fa-search"
                     style={{
                       position: "absolute",
                       top: "-5px",
