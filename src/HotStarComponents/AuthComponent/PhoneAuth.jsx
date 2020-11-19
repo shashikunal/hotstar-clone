@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import firebase from "../../firebase";
 import { toast } from "react-toastify";
 class PhoneAuth extends Component {
@@ -7,6 +7,7 @@ class PhoneAuth extends Component {
     super(props);
     this.state = {
       phone: "",
+      confirmValue: "",
     };
   }
   //handle Change event
@@ -24,8 +25,14 @@ class PhoneAuth extends Component {
         .auth()
         .signInWithPhoneNumber(this.state.phone, captchaVerifier)
         .then(confirmationResult => {
-          //   window.confirmationResult = confirmationResult;
-          toast.success("otp sent", confirmationResult);
+          let verificationCode = window.prompt("enter verification code");
+          confirmationResult
+            .confirm(verificationCode)
+            .then(result => {
+              var user = result.user;
+              console.log(user);
+            })
+            .catch(err => console.log(err));
         })
         .catch(err => console.log(err));
     } catch (err) {

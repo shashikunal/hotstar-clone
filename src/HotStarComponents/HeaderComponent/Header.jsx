@@ -150,7 +150,12 @@ class HeaderComponent extends Component {
                   subscribe
                 </a>
               </li>
-              {this.props.user.emailVerified ? <AuthUser /> : <AnonymousUser />}
+              {this.props.user.emailVerified ||
+              this.props.user.isAnonymous === false ? (
+                <AuthUser />
+              ) : (
+                <AnonymousUser />
+              )}
             </ul>
           </div>
         </nav>

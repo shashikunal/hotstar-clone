@@ -11,7 +11,6 @@ import PasswordReset from "./HotStarComponents/AuthComponent/PasswordReset";
 import AddMovieForm from "./HotStarComponents/HotStarAdmin/AddMovieForm";
 import ListMovies from "./HotStarComponents/HotStarAdmin/ListMovies";
 import ListMovie from "./HotStarComponents/HotStarAdmin/ListMovie";
-import RefExample from "./RefComponent/RefExampleComponent";
 import PhoneAuth from "./HotStarComponents/AuthComponent/PhoneAuth";
 
 class App extends Component {
@@ -49,6 +48,7 @@ class App extends Component {
             <Route path="/register" component={Register} />
             <Route path="/password-reset" component={PasswordReset} />
             <Route path="/phone-auth" component={PhoneAuth} />
+
             {this.state.userData ? (
               <Fragment>
                 <Route
